@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.25
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
@@ -73,6 +73,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 
 %changelog
+* Tue Jul 22 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 1.25-5
+- rebuild for RPM Fusion
+
 * Sat Sep 17 2007 Thorsten Leemhuis <fedora[AT]leemhuis.info> - 1.25-4
 - update license tag
 
