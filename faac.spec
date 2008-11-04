@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.25
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
@@ -39,6 +39,7 @@ This package contains development files and documentation for libfaac.
 %setup -q -n %{name}
 find . -type f -print|xargs dos2unix 
 %patch0 -p1 -b .patch0
+chmod 0644 COPYING ChangeLog README TODO
 
 %build
 sh ./bootstrap
@@ -73,6 +74,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 
 %changelog
+* Tue Nov 04 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 1.25-7
+- chmod 644 all docs (fixes #115)
+
 * Thu Jul 24 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 1.25-6
 - rebuild
 
