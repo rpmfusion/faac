@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.25
-Release:        7%{?dist}
+Release:        7%{?dist}.1
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
