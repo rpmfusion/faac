@@ -1,21 +1,17 @@
 Name:           faac
-Version:        1.25
-Release:        7%{?dist}
+Version:        1.28
+Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
-License:        LGPL2+
+License:        LGPLv2+
 URL:            http://www.audiocoding.com/
-Source0:        http://download.sourceforge.net/sourceforge/faac/faac-1.25.tar.gz
-Patch0:         faac-1.25-enable-libmp4v2.patch
+Source0:        http://downloads.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
+Patch0:         %{name}-libmp4v2.patch
 
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 
 BuildRequires:  libmp4v2-devel
-BuildRequires:  libtool
-BuildRequires:  autoconf
-BuildRequires:  automake
-BuildRequires:  dos2unix
 
 
 %description
@@ -36,14 +32,21 @@ multichannel and gapless encoding.
 This package contains development files and documentation for libfaac.
 
 %prep
-%setup -q -n %{name}
-find . -type f -print|xargs dos2unix 
-%patch0 -p1 -b .patch0
-chmod 0644 COPYING ChangeLog README TODO
+%setup -q
+%patch0 -p1 -b .mp4v2
+touch -r configure.in.mp4v2 configure.in
+#fix permissions
+find . -type f \( -name \*.h -or -name \*.c \) -exec chmod 644 {} \;
+chmod 644 AUTHORS COPYING ChangeLog NEWS README TODO docs/*
+
+#fix encoding
+/usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
 
 %build
-sh ./bootstrap
 %configure --disable-static
+# remove rpath from libtool
+sed -i.rpath 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i.rpath 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 make %{?_smp_mflags}
 
 
@@ -63,9 +66,10 @@ rm -rf $RPM_BUILD_ROOT
 
 %files 
 %defattr(-,root,root,-)
-%doc COPYING ChangeLog README TODO
+%doc AUTHORS COPYING ChangeLog NEWS README TODO docs/*
 %{_bindir}/*
 %{_libdir}/*.so.*
+%{_mandir}/man1/%{name}*
 
 %files devel
 %defattr(-,root,root,-)
@@ -74,6 +78,20 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 
 %changelog
+* Thu Mar 12 2009 Dominik Mierzejewski <rpm [AT] greysector [DOT] net> - 1.28-1
+- update to 1.28
+- drop redundant BRs
+- fix Source URL and use bz2 tarball
+- fix rpath
+- include manpage
+- ship AUTHORS NEWS docs/*
+- integrated changes from Julian Sikorski <belegdol[at]gmail[dot]com>
+-- Dropped dos2unix BR, not needed anymore
+-- Made Source0 use macros
+-- Fixed License tag
+-- Fixed file permissions
+-- Converted ChangeLog to utf-8
+
 * Tue Nov 04 2008 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info - 1.25-7
 - chmod 644 all docs (fixes #115)
 
