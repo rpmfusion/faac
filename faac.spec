@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.28
-Release:        3%{?dist}
+Release:        4%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
@@ -78,7 +78,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_includedir}/*.h
 
 %changelog
-* Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.28-3
+* Thu Feb 09 2012 Nicolas Chauvet <kwizart@gmail.com> - 1.28-4
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
 
 * Sun Oct 25 2009 kwizart < kwizart at gmail.com > - 1.28-2
