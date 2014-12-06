@@ -1,17 +1,15 @@
 Name:           faac
 Version:        1.28
-Release:        6%{?dist}
+Release:        7%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
 License:        LGPLv2+
 URL:            http://www.audiocoding.com/
 Source0:        http://downloads.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
-Patch0:         %{name}-libmp4v2.patch
+Patch0:         %{name}-libmp4v2_2.0.patch
 
-BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-
-BuildRequires:  libmp4v2-devel
+BuildRequires:  libmp4v2-devel >= 2.0.0
 
 
 %description
@@ -32,15 +30,18 @@ multichannel and gapless encoding.
 This package contains development files and documentation for libfaac.
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}
 %patch0 -p1 -b .mp4v2
-touch -r configure.in.mp4v2 configure.in
 #fix permissions
 find . -type f \( -name \*.h -or -name \*.c \) -exec chmod 644 {} \;
 chmod 644 AUTHORS COPYING ChangeLog NEWS README TODO docs/*
 
 #fix encoding
 /usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
+
+# Autotools
+autoreconf -vif
+
 
 %build
 %configure --disable-static
@@ -51,12 +52,8 @@ make %{?_smp_mflags}
 
 
 %install
-rm -rf $RPM_BUILD_ROOT
 make install DESTDIR=$RPM_BUILD_ROOT INSTALL="install -p"
 
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 
 %post -p /sbin/ldconfig
@@ -65,19 +62,21 @@ rm -rf $RPM_BUILD_ROOT
 
 
 %files 
-%defattr(-,root,root,-)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO docs/*
 %{_bindir}/*
 %{_libdir}/*.so.*
 %{_mandir}/man1/%{name}*
 
 %files devel
-%defattr(-,root,root,-)
 %exclude  %{_libdir}/*.la
 %{_libdir}/*.so
 %{_includedir}/*.h
 
 %changelog
+* Sat Dec  6 2014 Nicolas Chauvet <kwizart@gmail.com> - 1.28-7
+- Fix build with libmp4v2-devel - rfbz#3188
+- Clean-up spec file
+
 * Sun Aug 31 2014 Sérgio Basto <sergio@serjux.com> - 1.28-6
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_21_22_Mass_Rebuild
 
