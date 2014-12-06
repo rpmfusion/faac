@@ -7,9 +7,11 @@ Group:          Applications/Multimedia
 License:        LGPLv2+
 URL:            http://www.audiocoding.com/
 Source0:        http://downloads.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.bz2
-Patch0:         %{name}-libmp4v2_2.0.patch
+Patch0:         %{name}-libmp4v2.patch
 
-BuildRequires:  libmp4v2-devel >= 2.0.0
+BuildRequires:  libtool
+BuildRequires:  libmp4v2-devel
+
 
 
 %description
