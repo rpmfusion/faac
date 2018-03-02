@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.29.3
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
@@ -65,6 +65,9 @@ find $RPM_BUILD_ROOT -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Fri Mar 02 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 1.29.3-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
+
 * Thu Aug 31 2017 RPM Fusion Release Engineering <kwizart@rpmfusion.org> - 1.29.3-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_27_Mass_Rebuild
 
