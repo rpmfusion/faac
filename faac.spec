@@ -1,6 +1,6 @@
 Name:           faac
-Version:        1.29.3
-Release:        3%{?dist}
+Version:        1.29.9.2
+Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 Group:          Applications/Multimedia
@@ -33,11 +33,11 @@ This package contains development files and documentation for libfaac.
 #fix encoding
 /usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
 
-./bootstrap
-
 
 %build
 %configure --disable-static
+sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
+sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
 %make_build
 
 
@@ -48,9 +48,7 @@ This package contains development files and documentation for libfaac.
 find $RPM_BUILD_ROOT -name '*.la' -or -name '*.a' | xargs rm -f
 
 
-%post -p /sbin/ldconfig
-
-%postun -p /sbin/ldconfig
+%ldconfig_scriptlets
 
 
 %files 
@@ -65,6 +63,11 @@ find $RPM_BUILD_ROOT -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Sun Apr 15 2018 Leigh Scott <leigh123linux@googlemail.com> - 1.29.9.2-1
+- Update to 1.29.9.2
+- Fix rpath
+- Update scriptlets
+
 * Fri Mar 02 2018 RPM Fusion Release Engineering <leigh123linux@googlemail.com> - 1.29.3-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_28_Mass_Rebuild
 
