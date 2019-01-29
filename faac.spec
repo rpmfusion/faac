@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.29.9.2
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 License:        LGPLv2+
@@ -63,6 +63,9 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Tue Jan 29 2019 Nicolas Chauvet <kwizart@gmail.com> - 1.29.9.2-5
+- Drop libtool deps
+
 * Mon Oct 08 2018 Leigh Scott <leigh123linux@googlemail.com> - 1.29.9.2-4
 - Enable DRM support (rfbz#5043)
 - Spec file clean up
