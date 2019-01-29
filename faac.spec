@@ -7,8 +7,7 @@ License:        LGPLv2+
 URL:            http://www.audiocoding.com/
 Source0:        http://downloads.sourceforge.net/sourceforge/%{name}/%{name}-%{version}.tar.gz
 
-BuildRequires:  libtool
-BuildRequires:  autoconf
+BuildRequires:  gcc
 Patch0:         faac-1.29.9.2-drm.patch
 
 
@@ -36,7 +35,6 @@ This package contains development files and documentation for libfaac.
 
 
 %build
-autoreconf -fiv
 %configure --disable-static
 sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
 sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
