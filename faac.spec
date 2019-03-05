@@ -1,6 +1,6 @@
 Name:           faac
 Version:        1.29.9.2
-Release:        5%{?dist}
+Release:        6%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 License:        LGPLv2+
@@ -63,6 +63,9 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Tue Mar 05 2019 RPM Fusion Release Engineering <leigh123linux@gmail.com> - 1.29.9.2-6
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_30_Mass_Rebuild
+
 * Tue Jan 29 2019 Nicolas Chauvet <kwizart@gmail.com> - 1.29.9.2-5
 - Drop libtool deps
 
