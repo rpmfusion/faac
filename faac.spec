@@ -2,7 +2,7 @@
 
 Name:           faac
 Version:        1.30
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 License:        LGPLv2+
@@ -33,8 +33,8 @@ This package contains development files and documentation for libfaac.
 
 %prep
 %setup -q -n %{name}-%{_version}
-./bootstrap
 %patch0 -p1 -b .drm
+./bootstrap
 #fix encoding
 /usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
 
@@ -68,6 +68,9 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Wed Jan 01 2020 Leigh Scott <leigh123linux@gmail.com> - 1.30-2
+- bootstrap after applying patch
+
 * Wed Jan 01 2020 Leigh Scott <leigh123linux@gmail.com> - 1.30-1
 - Update to 1.30
 
