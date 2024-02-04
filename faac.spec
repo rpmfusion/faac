@@ -2,7 +2,7 @@
 
 Name:           faac
 Version:        1.30
-Release:        9%{?dist}
+Release:        10%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 License:        LGPLv2+
@@ -68,6 +68,9 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Sun Feb 04 2024 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.30-10
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_40_Mass_Rebuild
+
 * Thu Aug 03 2023 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.30-9
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_39_Mass_Rebuild
 
