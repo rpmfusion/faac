@@ -33,7 +33,7 @@ This package contains development files and documentation for libfaac.
 
 %prep
 %setup -q -n %{name}-%{_version}
-%patch0 -p1 -b .drm
+%patch -P0 -p1 -b .drm
 ./bootstrap
 #fix encoding
 /usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
