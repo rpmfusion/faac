@@ -1,18 +1,15 @@
-%global _version 1_30
-
 Name:           faac
-Version:        1.30
-Release:        12%{?dist}
+Version:        1.31.1
+Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 License:        LGPLv2+
 URL:            http://www.audiocoding.com/
-Source0:        https://github.com/knik0/faac/archive/%{_version}/%{name}-%{_version}.tar.gz
+Source0:        https://github.com/knik0/faac/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  gcc
 BuildRequires:  automake
 BuildRequires:  libtool
-Patch0:         faac-1.30-drm.patch
 
 
 %description
@@ -32,8 +29,7 @@ multichannel and gapless encoding.
 This package contains development files and documentation for libfaac.
 
 %prep
-%setup -q -n %{name}-%{_version}
-%patch -P0 -p1 -b .drm
+%autosetup -p1 -n %{name}-%{name}-%{version}
 ./bootstrap
 #fix encoding
 /usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
@@ -64,10 +60,14 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_mandir}/man1/%{name}*
 
 %files devel
+%{_libdir}/pkgconfig/faac.pc
 %{_libdir}/*.so
 %{_includedir}/*.h
 
 %changelog
+* Wed Mar 05 2025 Leigh Scott <leigh123linux@gmail.com> - 1.31.1-1
+- Update to 1.31.1
+
 * Wed Jan 29 2025 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.30-12
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
