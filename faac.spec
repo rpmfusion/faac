@@ -1,15 +1,14 @@
 Name:           faac
-Version:        1.31.1
-Release:        3%{?dist}
+Version:        1.40
+Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
-License:        LGPLv2+
+License:        LGPL-2.1-or-later
 URL:            http://www.audiocoding.com/
 Source0:        https://github.com/knik0/faac/archive/%{name}-%{version}/%{name}-%{version}.tar.gz
 
 BuildRequires:  gcc
-BuildRequires:  automake
-BuildRequires:  libtool
+BuildRequires:  meson
 
 
 %description
@@ -30,41 +29,38 @@ This package contains development files and documentation for libfaac.
 
 %prep
 %autosetup -p1 -n %{name}-%{name}-%{version}
-./bootstrap
 #fix encoding
 /usr/bin/iconv -f iso8859-1 -t utf-8 AUTHORS > AUTHORS.conv && touch -r AUTHORS AUTHORS.conv && /bin/mv -f AUTHORS.conv AUTHORS
 
 
 %build
-%configure --disable-static
-sed -i 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' libtool
-sed -i 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' libtool
-%make_build
+%meson
+%meson_build
 
 
 %install
-%make_install
+%meson_install
 
 #Remove libtool archives.
 find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
-
-
-%ldconfig_scriptlets
 
 
 %files
 %doc AUTHORS ChangeLog NEWS README TODO docs/*
 %license COPYING
 %{_bindir}/*
-%{_libdir}/*.so.*
+%{_libdir}/libfaac.so.*
 %{_mandir}/man1/%{name}*
 
 %files devel
 %{_libdir}/pkgconfig/faac.pc
-%{_libdir}/*.so
+%{_libdir}/libfaac.so
 %{_includedir}/*.h
 
 %changelog
+* Tue Mar 17 2026 Leigh Scott <leigh123linux@gmail.com> - 1.40-1
+- Update to 1.40
+
 * Mon Feb 02 2026 RPM Fusion Release Engineering <sergiomb@rpmfusion.org> - 1.31.1-3
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_44_Mass_Rebuild
 
