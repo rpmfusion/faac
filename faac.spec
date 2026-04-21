@@ -1,5 +1,5 @@
 Name:           faac
-Version:        1.40
+Version:        1.50
 Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
@@ -58,6 +58,9 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Tue Apr 21 2026 Leigh Scott <leigh123linux@gmail.com> - 1.50-1
+- Update to 1.50
+
 * Tue Mar 17 2026 Leigh Scott <leigh123linux@gmail.com> - 1.40-1
 - Update to 1.40
 
