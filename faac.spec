@@ -1,5 +1,5 @@
 Name:           faac
-Version:        1.50
+Version:        2.0
 Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
@@ -34,19 +34,16 @@ This package contains development files and documentation for libfaac.
 
 
 %build
-%meson
+%meson --default-library=shared
 %meson_build
 
 
 %install
 %meson_install
 
-#Remove libtool archives.
-find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
-
 
 %files
-%doc AUTHORS ChangeLog NEWS README TODO docs/*
+%doc AUTHORS ChangeLog NEWS README.md TODO docs/*
 %license COPYING
 %{_bindir}/*
 %{_libdir}/libfaac.so.*
@@ -58,6 +55,9 @@ find %buildroot -name '*.la' -or -name '*.a' | xargs rm -f
 %{_includedir}/*.h
 
 %changelog
+* Mon Jul 20 2026 Leigh Scott <leigh123linux@gmail.com> - 2.0-1
+- Update to 2.0
+
 * Tue Apr 21 2026 Leigh Scott <leigh123linux@gmail.com> - 1.50-1
 - Update to 1.50
 
