@@ -1,6 +1,6 @@
 Name:           faac
-Version:        2.0
-Release:        2%{?dist}
+Version:        2.1
+Release:        1%{?dist}
 Summary:        Encoder and encoding library for MPEG2/4 AAC
 
 License:        LGPL-2.1-or-later
@@ -55,6 +55,9 @@ This package contains development files and documentation for libfaac.
 %{_includedir}/*.h
 
 %changelog
+* Tue Aug 18 2026 Leigh Scott <leigh123linux@gmail.com> - 2.1-1
+- Update to 2.1
+
 * Sun Aug 02 2026 RPM Fusion Release Engineering <leigh123linux@rpmfusion.org> - 2.0-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_45_Mass_Rebuild
 
